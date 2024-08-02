@@ -38,6 +38,11 @@ module.exports = {
         "danger": "#E10C22",
         "dark": "#1E293B",
         "darkest": "#0C121C"
+      },
+      fontFamily: {
+        "Poppins": ["Poppins", "sans-serif"],
+        "Montserrat": ["Montserrat", "sans-serif"],
+        "Inter": ["Inter", "sans-serif"]
       }
     },
   },

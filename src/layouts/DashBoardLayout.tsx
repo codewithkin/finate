@@ -18,7 +18,7 @@ export default function DashboardLayout() {
     if (!isLoaded) return "Loading..."
 
     return (
-        <article className="flex">
+        <article className="flex font-Inter">
             <Nav />
             <Outlet />
         </article>

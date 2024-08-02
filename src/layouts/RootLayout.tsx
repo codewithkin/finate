@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { ClerkProvider, SignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 import DashboardLayout from './DashBoardLayout';
 
@@ -18,7 +18,8 @@ export default function RootLayout() {
       publishableKey={PUBLISHABLE_KEY}
     >
       <SignedIn>
-        <DashboardLayout />
+        <Navigate to="/dashboard/" />
+        <Outlet />
       </SignedIn>
       <SignedOut>
         <main className="flex align-center p-10 items-center justify-center">
