@@ -5,7 +5,7 @@ export default function Nav () {
     const {user} = useUser();
 
     return (
-        <nav className="h-[100vh] bg-primary grid align-between lg:w-1/5 md:w-1/3 sm:w-1/3">
+        <nav className="bg-primary grid align-between lg:w-1/5 md:w-1/3 sm:w-1/3">
             {/* User information */}
             <div className="flex p-5 justify-center items-center gap-2 text-white">
                 <UserButton />
