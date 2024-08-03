@@ -1,4 +1,4 @@
-import NewUsers from "@/components/dashboard/Users";
+import NewUsers from "@/components/dashboard/Overview";
 import SavedChart from "@/components/ui/SavedChart";
 import BudgetsTable from "@/components/ui/BudgetsTable";
 import WelcomeCard from "@/components/ui/WelcomeCard";
