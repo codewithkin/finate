@@ -1,7 +1,8 @@
 import NewUsers from "@/components/dashboard/Overview";
-import SavedChart from "@/components/ui/SavedChart";
-import BudgetsTable from "@/components/ui/BudgetsTable";
+import SavedChart from "@/components/dashboard/SavedChart";
+import BudgetsTable from "@/components/dashboard/BudgetsTable";
 import WelcomeCard from "@/components/ui/WelcomeCard";
+import ExpenseTable from "@/components/dashboard/ExpensesTable";
 
 export default function DashBoard () {
     return (
@@ -14,6 +15,7 @@ export default function DashBoard () {
                 <SavedChart />
             </div>
             <BudgetsTable />
+            <ExpenseTable />
         </article>
     )
 }

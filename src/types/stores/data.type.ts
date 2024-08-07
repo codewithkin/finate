@@ -1,7 +1,7 @@
 import { Tables } from "../database.types";
 
 export type shape = {
-    balance: number,
+    balance: Tables<"balances">,
     expenses: Tables<"expenses">,
     receipts: Tables<"receptions">,
     budgets: Tables<"budgets">,

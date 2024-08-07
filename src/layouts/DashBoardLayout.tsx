@@ -18,24 +18,18 @@ export default function DashboardLayout() {
             navigate("/sign-in");
         }
 
-        
         const fetchUserData = async () => {
             // Get the user's balances
-            const {data} = await getData("balances", userId);
+            const {data: balance} = await getData("balances", userId);
 
-            const balance = data[0];
+            // Get the user's expenses
+            const {data: expenses} = await getData("expenses", userId);
 
-            const expensesData = await getData("expenses", userId);
+            // Get the user's receipts
+            const {data: receipts} = await getData("receptions", userId);
 
-            const expenses = data[0];
-
-            const receiptsData = await getData("receipts", userId);
-
-            const receipts = data[0];
-
-            const budgetsData = await getData("budgets", userId);
-
-            const budgets = data[0];
+            // Get the user's budgets
+            const {data: budgets} = await getData("budgets", userId);
 
             updateUserInfo({
                 balance,

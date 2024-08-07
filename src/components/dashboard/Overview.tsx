@@ -4,17 +4,32 @@ import {
     HoverCardContent,
     HoverCardTrigger,
   } from "@/components/ui/hover-card";
+import { useDataStore } from "@/stores/data.store";
 import { UserButton, useUser } from "@clerk/clerk-react";
   
 export default function NewUsers () {
     const {user} = useUser();
+
+    const balance = useDataStore(state => state.balance);
+    const expenses = useDataStore(state => state.expenses);
+    const budgets = useDataStore(state => state.budgets);
+
+    const saved = balance && expenses.expenses.length > 0 ? balance.amount / expenses.expenses.length : 0;
+
+    let savedColor = "black";
+
+    if(saved > 0) {
+        savedColor = "green-500";
+    } else {
+        savedColor = "red-500";
+    }
 
     return (
         <div>
             <h2 className="font-Poppins text-light text-body-text">Current Balance</h2>
             <div className="grid gap-4">
                 <div className="w-full flex justify-between items-center">
-                    <h2 className="text-6xl font-bold font-Poppins">$0.<span className="text-body-text">00</span></h2>
+                    <h2 className="text-6xl font-bold font-Poppins">${balance.amount || 0}.<span className="text-body-text">00</span></h2>
                     
                     {/* User information */}
                     <div className="flex p-5 justify-center items-center gap-2">
@@ -29,11 +44,18 @@ export default function NewUsers () {
                 <div className="flex gap-4">
                 <HoverCard>
                     <HoverCardTrigger>
-                        <Badge className="flex bg-secondary text-white font-semibold rounded-full px-10 text-xl py-2">
-                            20% 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
-                            </svg>
+                        <Badge className={`flex bg-${savedColor} text-white font-semibold rounded-full px-10 text-xl py-2`}>
+                            { budgets.budgets.length > 0 && balance.amount > 0 ? balance.amount / budgets.budgets.length : 0 }%
+                            {
+                                saved > 0 ?
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+                                </svg> :
+                                saved < 0 && 
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            }
                         </Badge>
                     </HoverCardTrigger>
                     <HoverCardContent>
@@ -61,7 +83,7 @@ export default function NewUsers () {
                 </HoverCard>
                     <Badge variant="outline" className="flex gap-4 text-white font-semibold rounded-full px-10 text-xl py-2">
                         <span className="font-light text-black">Saved:</span>
-                        <span className="text-secondary font-bold font-Poppins">$2000</span>
+                        <span className={`text-${savedColor} text-black font-bold font-Poppin`}>${saved}</span>
                     </Badge>
                 </div>  
             </div>

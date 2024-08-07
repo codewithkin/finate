@@ -1,27 +1,22 @@
+[?25l
+    Select a project:                                                                          
+                                                                                               
+  >  1. nxuybbzhgvpvmzqvimxd [name: Finate, org: caolydpnumihbqcqhpmj, region: eu-central-1]   
+    2. cypsqughocfabwtpwfzq [name: Shitsuyoka, org: dozomrdnuvgpqdggcuye, region: eu-central-1]
+                                                                                               
+                                                                                               
+    ↑/k up • ↓/j down • / filter • q quit • ? more                                             
+                                                                                               [0D[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[0D[2K [0D[2K[?25h[?1002l[?1003l[?1006lexport type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
 export type Database = {
   public: {
     Tables: {
-      balances: {
-        Row: {
-          amount: number
-          created_at: string
-          id: number
-          user_id: string
-        }
-        Insert: {
-          amount: number
-          created_at?: string
-          id?: number
-          user_id?: string
-        }
-        Update: {
-          amount?: number
-          created_at?: string
-          id?: number
-          user_id?: string
-        }
-        Relationships: []
-      }
       budgets: {
         Row: {
           budgets: Json
@@ -76,18 +71,18 @@ export type Database = {
       }
       receptions: {
         Row: {
+          expenses: Json
           id: number
-          receptions: Json
           user_id: string
         }
         Insert: {
+          expenses: Json
           id?: number
-          receptions: Json
           user_id: string
         }
         Update: {
+          expenses?: Json
           id?: number
-          receptions?: Json
           user_id?: string
         }
         Relationships: [
