@@ -14,7 +14,7 @@ export default function NewUsers () {
             <h2 className="font-Poppins text-light text-body-text">Current Balance</h2>
             <div className="grid gap-4">
                 <div className="w-full flex justify-between items-center">
-                    <h2 className="text-6xl font-bold font-Poppins">$200,000.<span className="text-body-text">90</span></h2>
+                    <h2 className="text-6xl font-bold font-Poppins">$0.<span className="text-body-text">00</span></h2>
                     
                     {/* User information */}
                     <div className="flex p-5 justify-center items-center gap-2">
