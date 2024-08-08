@@ -13,7 +13,6 @@ import { shape } from "@/types/stores/data.type";
 
 export default function ExpenseTable() {
     const expenses = useDataStore(state => state.expenses);
-
     const expenseData = expenses.expenses;
 
     return (
@@ -30,12 +29,11 @@ export default function ExpenseTable() {
  
                         <TableHeader>
                         <TableRow>
-                            <TableHead className="w-[100px]">expense Name</TableHead>
+                            <TableHead className="w-[100px]">Name</TableHead>
                             <TableHead>Amount</TableHead>
                             <TableHead>Note</TableHead>
-                            <TableHead>Date Created </TableHead>
-                            <TableHead>Lasts Until</TableHead>
-                            <TableHead className="text-right">Exceeded</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead>Category</TableHead>
                         </TableRow>
                     </TableHeader>
                     {
@@ -43,12 +41,11 @@ export default function ExpenseTable() {
                     <TableBody>
                         {expenseData.map((expense: shape["expenses"]["expenses"]) => (
                             <TableRow key={expense.created_at}>
-                                <TableCell className="font-medium">{expense.created_at}</TableCell>
+                                <TableCell className="font-medium">{expense.name}</TableCell>
                                 <TableCell className="font-medium">{expense.amount}</TableCell>
                                 <TableCell className="font-medium">{expense.note}</TableCell>
-                                <TableCell>{expense.endsOn}</TableCell>
-                                <TableCell>{expense.priority}</TableCell>
-                                <TableCell className="text-right">{expense.exceeded}</TableCell>
+                                <TableCell className="font-medium">{expense.date}</TableCell>
+                                <TableCell className="font-medium">{expense.category}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
