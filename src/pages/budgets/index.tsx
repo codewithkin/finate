@@ -1,3 +1,4 @@
+import BudgetProgress from "@/components/budgets/BudgetProgress";
 import BudgetsLimit from "@/components/budgets/BudgetsLimit";
 import BudgetsOverview from "@/components/budgets/BudgetsOverview";
 import { BudgetsTable } from "@/components/budgets/BudgetsTable";
@@ -12,11 +13,13 @@ export default function BudgetPage () {
                 <BudgetsLimit />
             </article>
 
-
-            <BudgetsTable  />
-
-            <article className="flex w-full">
-
+            <article className="flex w-full gap-4">
+                <article className="w-4/5">
+                    <BudgetsTable  />
+                </article>
+                <article className="w-1/5">
+                    <BudgetProgress />
+                </article>
             </article>
         </article>
     )
