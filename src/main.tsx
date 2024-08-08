@@ -10,6 +10,7 @@ import DashBoardLayout from "./layouts/DashBoardLayout";
 import SignInPage from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import BudgetPage from './pages/budgets';
+import ComingSoon from './components/ComingSoon';
 
 const router = createBrowserRouter([
   {
@@ -29,8 +30,32 @@ const router = createBrowserRouter([
           {
             path:"budgets",
             element: <BudgetPage />
+          },
+          {
+            path:"careers",
+            element: <ComingSoon />
+          },
+          {
+            path:"settings",
+            element: <ComingSoon />
+          },
+          {
+            path:"transactions",
+            element: <ComingSoon />
+          },
+          {
+            path:"ai",
+            element: <ComingSoon />
           }
         ]
+      },
+      {
+        path: "ai",
+        element: <ComingSoon />
+      },
+      {
+        path: "messages",
+        element: <ComingSoon />
       }
     ]
   }
