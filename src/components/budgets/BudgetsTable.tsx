@@ -1,7 +1,14 @@
-"use client"
-
 import * as React from "react"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 import {
   Card,
@@ -28,6 +35,8 @@ import {
 import { useDataStore } from "@/stores/data.store"
 import { shape } from "@/types/stores/data.type"
 import { Link } from "react-router-dom"
+import { HoverCard, HoverCardTrigger } from "@radix-ui/react-hover-card"
+import { HoverCardContent } from "../ui/hover-card"
 
 export function BudgetsTable() {
   const [timeRange, setTimeRange] = React.useState("90d")
@@ -176,6 +185,38 @@ export function BudgetsTable() {
           </article>
        }
       </CardContent>
+      <Dialog>
+        <HoverCard>
+          <HoverCardTrigger>
+            <DialogTrigger className="flex gap-2 rounded-md text-white font-semibold bg-primary px-4 py-2">
+              View AI Note
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3" />
+              </svg>
+              </DialogTrigger>
+          </HoverCardTrigger>
+          <HoverCardContent>
+            Learn what our AI has to say about your budgets and spending trends.
+          </HoverCardContent>
+        </HoverCard>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="text-center text-xl">Tips from our AI</DialogTitle>
+            <DialogDescription className="bg-gray-200 rounded-md p-4">
+              No data available yet, create a few budgets to view AI messages.
+            </DialogDescription>
+            { 
+              budgets.budgets.length === 0 && 
+              <Link className="font-medium flex justify-center items-center gap-4 hover:bg-purple-800 transition duration-500 text-center rounded-lg bg-primary px-8 py-2 text-white" to="#">
+                Create your first budget
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              </Link>
+            }
+          </DialogHeader>
+        </DialogContent>
+    </Dialog>
     </Card>
   )
 }
