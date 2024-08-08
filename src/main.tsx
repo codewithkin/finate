@@ -11,6 +11,7 @@ import SignInPage from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import BudgetPage from './pages/budgets';
 import ComingSoon from './components/ComingSoon';
+import NotFound from './components/NotFound';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "messages",
         element: <ComingSoon />
+      },
+      {
+        path: "*",
+        element: <NotFound />
       }
     ]
   }
