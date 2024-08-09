@@ -1,3 +1,5 @@
+import ExpenseTable from "@/components/transactions/ExpensesTable";
+import ReceptionTable from "@/components/transactions/ReceptionsTable";
 import TransactionsBreakdown from "@/components/transactions/TransactionsBreakdown";
 import { TransactionsRatio } from "@/components/transactions/TransactionsRatio";
 import { TransactionsTable } from "@/components/transactions/TransactionsTable";
@@ -21,6 +23,10 @@ export default function TransactionsPage () {
                 <TransactionsTable />
 
                 <TransactionsRatio />
+
+                <ExpenseTable />
+
+                <ReceptionTable />
             </article>
         </article>
     )

@@ -182,8 +182,7 @@ export function TransactionsTable() {
             </AreaChart>
           </ChartContainer> :
           <article className="grid justify-center items-center">
-            <h2 className="font-medium text-body-text text-2xl text-center">No Budgets yet</h2>
-            <Link className="font-medium rounded-lg bg-primary px-8 py-2 text-white" to="#">Create new budget</Link>
+            <h2 className="font-medium text-body-text text-2xl text-center">No Transactions yet</h2>
           </article>
        }
       </CardContent>
