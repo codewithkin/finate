@@ -12,6 +12,7 @@ import SignUp from "./pages/auth/SignUp";
 import BudgetPage from './pages/budgets';
 import ComingSoon from './components/ComingSoon';
 import NotFound from './components/NotFound';
+import TransactionsPage from './pages/transactions';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
           },
           {
             path:"transactions",
-            element: <ComingSoon />
+            element: <TransactionsPage />
           },
           {
             path:"ai",
