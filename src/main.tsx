@@ -13,6 +13,7 @@ import BudgetPage from './pages/budgets';
 import ComingSoon from './components/ComingSoon';
 import NotFound from './components/NotFound';
 import TransactionsPage from './pages/transactions';
+import NewBudgetPage from './pages/budgets/new';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
             element: <DashBoard /> 
           },
           {
-            path:"budgets",
-            element: <BudgetPage />
+            path:"budgets/",
+            element: <BudgetPage />,
+          },
+          {
+              path: "budgets/new",
+              element: <NewBudgetPage />
           },
           {
             path:"careers",
