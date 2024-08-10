@@ -6,10 +6,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import {addNewBudget} from "@/utils/supabaseRequests";
 import { useAuth } from "@clerk/clerk-react";
-
+import { toast } from "sonner"
+import { useNavigate } from "react-router-dom";
+import { useUtilsStore } from "@/stores/utils.store";
 
 export default function NewBudgetPage () {
     const [loading, setLoading] = useState(false);
+    const updateRefetch = useUtilsStore(state => state.updateRefetch);
+
+    const navigate = useNavigate();
 
     const {userId} = useAuth();
 
@@ -28,8 +33,12 @@ export default function NewBudgetPage () {
                 const success = await addNewBudget(userId, values);
 
                 if(success) {
-                    // Show a success popup with shadcn
-                    console.log("Success")
+                    toast("Budget has been created.");
+
+                    // Make the components refetch the data
+                    updateRefetch("some_random_value");
+
+                    setTimeout(() => {navigate("/dashboard")}, 2000)
                 } 
             } catch (e) {
                 console.log(e)
@@ -41,37 +50,46 @@ export default function NewBudgetPage () {
 
     return (
         <section className="px-4 py-8 w-screen overflow-y-scroll h-screen flex flex-col justify-center items-center">
-            <h2 className="text-2xl text-center font-semibold font-Inter">Create a new budget</h2>
+            <h2 className="text-2xl text-center font-Inter">Create a new budget</h2>
 
             <form 
             className="my-4"
             onSubmit={formik.handleSubmit}>
                 <article className="grid md:grid-cols-2 gap-2">
                     <article>
+                        <label htmlFor="name">
+                            Budget Name
+                        </label>
                     <Input
                         type="text"
-                        placeholder="Budget Name"
+                        placeholder="Fanum Tax"
                         className="p-4"
                         {...formik.getFieldProps("name")}
                     />
                         {formik.touched.name && formik.errors.name ? (
-                            <div>{formik.errors.name}</div>
+                            <div className="text-danger text-md">{formik.errors.name}</div>
                         ) : null}
                     </article>
                     <article>
+                         <label htmlFor="name">
+                            Amount
+                        </label>
                     <Input
                         type="number"
-                        placeholder="Amount"
+                        placeholder="0"
                         className="p-4"
                         {...formik.getFieldProps("amount")}
                     />
                            {formik.touched.amount && formik.errors.amount ? (
-         <div>{formik.errors.amount}</div>
+         <div className="text-danger text-md">{formik.errors.amount}</div>
        ) : null}
                     </article>
                 </article>
 
                 <article className="my-2">
+                     <label htmlFor="name">
+                            Budget ends on
+                        </label>
                     <Input
                         type="date"
                         placeholder="End date"
@@ -79,18 +97,19 @@ export default function NewBudgetPage () {
                         {...formik.getFieldProps("endsOn")}
                     />
                            {formik.touched.endsOn && formik.errors.endsOn ? (
-         <div>{formik.errors.endsOn}</div>
+         <div className="text-danger text-md">{formik.errors.endsOn}</div>
        ) : null}
                 </article>
 
                 <article className="my-2">
+                    
                     <Textarea
                         placeholder="Note"
                         className="p-4"
                         {...formik.getFieldProps("note")}
                     />
                            {formik.touched.note && formik.errors.note ? (
-         <div>{formik.errors.note}</div>
+         <div className="text-danger text-md">{formik.errors.note}</div>
        ) : null}
                 </article>
 

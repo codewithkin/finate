@@ -1,6 +1,7 @@
 import { Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { ClerkProvider, SignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 import DashboardLayout from './DashBoardLayout';
+import { Toaster } from "@/components/ui/sonner"
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -26,6 +27,7 @@ export default function RootLayout() {
           <SignIn />
         </main>
       </SignedOut>
+      <Toaster />
     </ClerkProvider>
   )
 }

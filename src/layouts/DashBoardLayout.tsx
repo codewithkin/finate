@@ -4,9 +4,11 @@ import { Outlet, useNavigate } from "react-router-dom"
 import Nav from '@/components/Nav'
 import { getData } from '@/utils/supabaseRequests'
 import { useDataStore } from '@/stores/data.store'
+import { useUtilsStore } from '@/stores/utils.store'
 
 export default function DashboardLayout() {
     const { userId, isLoaded } = useAuth()
+    const refetch = useUtilsStore(state => state.refetch);
     const navigate = useNavigate()
     const updateUserInfo = useDataStore(state => state.updateUserInfo);
 
@@ -46,7 +48,7 @@ export default function DashboardLayout() {
         }
 
         fetchUserData();
-    }, [isLoaded])
+    }, [isLoaded, refetch])
 
     if (!isLoaded) return "Loading..."
 

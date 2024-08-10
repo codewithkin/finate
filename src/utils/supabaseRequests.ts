@@ -13,17 +13,10 @@ export const getData = async (tableName: string, user_id: string | null |undefin
 
 export const addNewBudget = async (userId: string | null |undefined, budgetData: budget) => {
     const supabase = await supabaseClient(import.meta.env.VITE_PUBLIC_ANONYMOUS_KEY);
-    const budgets = await supabase
-    .from("budgets")
-    .select()
-
-    const existingBudgets = budgets?.data;
-    console.log("Budgets :", budgets?.data);
 
     const {error} = await supabase
     .from("budgets")
     .upsert(
-        ...existingBudgets,
         {
                 userId,
                 name: budgetData.name,
