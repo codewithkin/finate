@@ -1,3 +1,19 @@
+[?25l
+    Select a project:                                                                          
+                                                                                               
+  >  1. nxuybbzhgvpvmzqvimxd [name: Finate, org: caolydpnumihbqcqhpmj, region: eu-central-1]   
+    2. cypsqughocfabwtpwfzq [name: Shitsuyoka, org: dozomrdnuvgpqdggcuye, region: eu-central-1]
+                                                                                               
+                                                                                               
+    ↑/k up • ↓/j down • / filter • q quit • ? more                                             
+                                                                                               [0D[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[0D[2K [0D[2K[?25h[?1002l[?1003l[?1006lexport type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
 export type Database = {
   public: {
     Tables: {
@@ -24,81 +40,69 @@ export type Database = {
       }
       budgets: {
         Row: {
-          budgets: Json
-          id: number
-          user_id: string
+          amount: number
+          endsOn: string
+          name: string
+          note: string | null
+          userId: string
         }
         Insert: {
-          budgets: Json
-          id?: number
-          user_id: string
+          amount: number
+          endsOn: string
+          name: string
+          note?: string | null
+          userId?: string
         }
         Update: {
-          budgets?: Json
-          id?: number
-          user_id?: string
+          amount?: number
+          endsOn?: string
+          name?: string
+          note?: string | null
+          userId?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "budgets_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       expenses: {
         Row: {
-          expenses: Json
-          id: number
-          user_id: string
+          amount: number
+          name: string
+          note: string | null
+          userid: string
         }
         Insert: {
-          expenses: Json
-          id?: number
-          user_id: string
+          amount: number
+          name: string
+          note?: string | null
+          userid?: string
         }
         Update: {
-          expenses?: Json
-          id?: number
-          user_id?: string
+          amount?: number
+          name?: string
+          note?: string | null
+          userid?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "expenses_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       receptions: {
         Row: {
-          id: number
-          receptions: Json
-          user_id: string
+          amount: number
+          name: string
+          note: string | null
+          userid: string
         }
         Insert: {
-          id?: number
-          receptions: Json
-          user_id: string
+          amount: number
+          name: string
+          note?: string | null
+          userid?: string
         }
         Update: {
-          id?: number
-          receptions?: Json
-          user_id?: string
+          amount?: number
+          name?: string
+          note?: string | null
+          userid?: string
         }
-        Relationships: [
-          {
-            foreignKeyName: "receptions_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
       users: {
         Row: {

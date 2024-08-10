@@ -9,7 +9,7 @@ export default function TransactionsPage () {
     const expenses = useDataStore(state => state.expenses);
     const receptions = useDataStore(state => state.receipts);
 
-    const transactions = [...expenses.expenses, ...receptions.receptions];
+    const transactions = [...expenses, ...receptions];
 
     return (
         <article className="px-4 py-8 w-screen overflow-y-scroll h-screen">

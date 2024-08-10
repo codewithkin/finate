@@ -14,7 +14,7 @@ export default function NewUsers () {
     const expenses = useDataStore(state => state.expenses);
     const budgets = useDataStore(state => state.budgets);
 
-    const saved = balance && expenses.expenses.length > 0 ? balance.amount / expenses.expenses.length : 0;
+    const saved = balance && expenses.length > 0 ? balance.amount / expenses.length : 0;
 
     let savedColor = "black";
 
@@ -45,7 +45,7 @@ export default function NewUsers () {
                 <HoverCard>
                     <HoverCardTrigger>
                         <Badge className={`flex bg-${savedColor} text-white font-semibold rounded-full px-10 text-xl py-2`}>
-                            { budgets.budgets.length > 0 && balance.amount > 0 ? balance.amount / budgets.budgets.length : 0 }%
+                            { budgets.length > 0 && balance.amount > 0 ? balance.amount / budgets.length : 0 }%
                             {
                                 saved > 0 ?
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">

@@ -4,12 +4,11 @@ import { Outlet, useNavigate } from "react-router-dom"
 import Nav from '@/components/Nav'
 import { getData } from '@/utils/supabaseRequests'
 import { useDataStore } from '@/stores/data.store'
-import { shape } from '@/types/stores/data.type'
 
 export default function DashboardLayout() {
     const { userId, isLoaded } = useAuth()
     const navigate = useNavigate()
-    const { updateUserInfo } = useDataStore()
+    const updateUserInfo = useDataStore(state => state.updateUserInfo);
 
     console.log('test', userId)
 
@@ -20,16 +19,17 @@ export default function DashboardLayout() {
 
         const fetchUserData = async () => {
             // Get the user's balances
-            const {data: balance} = await getData("balances", userId);
+            const balance = await getData("balances", userId);
 
             // Get the user's expenses
-            const {data: expenses} = await getData("expenses", userId);
+            const expenses = await getData("expenses", userId);
 
             // Get the user's receipts
-            const {data: receipts} = await getData("receptions", userId);
+            const receipts = await getData("receptions", userId);
 
             // Get the user's budgets
-            const {data: budgets} = await getData("budgets", userId);
+            const budgets = await getData("budgets", userId);
+            console.log("Budgets: ",budgets);
 
             updateUserInfo({
                 balance,

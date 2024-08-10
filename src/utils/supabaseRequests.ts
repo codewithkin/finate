@@ -1,12 +1,40 @@
 import {supabaseClient} from "./supabaseClient";
+import type {budget} from "@/types/budget";
 
 export const getData = async (tableName: string, user_id: string | null |undefined) => {
     const supabase = await supabaseClient(import.meta.env.VITE_PUBLIC_ANONYMOUS_KEY);
 
-    const data = await supabase
+    const {data} = await supabase
     .from(tableName)
     .select()
-    .eq("user_id", user_id)
 
     return data;
+}
+
+export const addNewBudget = async (userId: string | null |undefined, budgetData: budget) => {
+    const supabase = await supabaseClient(import.meta.env.VITE_PUBLIC_ANONYMOUS_KEY);
+    const budgets = await supabase
+    .from("budgets")
+    .select()
+
+    const existingBudgets = budgets?.data;
+    console.log("Budgets :", budgets?.data);
+
+    const {error} = await supabase
+    .from("budgets")
+    .upsert(
+        ...existingBudgets,
+        {
+                userId,
+                name: budgetData.name,
+                amount: budgetData.amount,
+                endsOn: budgetData.endsOn,
+                note: budgetData.note
+    })
+
+    if(error) {
+        console.log(error.message);
+    } else {
+        return true;
+    }
 }

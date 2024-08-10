@@ -8,24 +8,19 @@ export const useDataStore = create<shape>()(set => ({
         id: 0,
         user_id: ""
     },
-    budgets: {
-        id: 0,
-        user_id: "",
-        budgets: [],
-    },
-    expenses: {
-        id: 0,
-        user_id: "",
-        expenses: [],
-    },
-    receipts: {
-        id: 0,
-        user_id: "",
-        receptions: [],
-    },
+    budgets: [],
+    expenses: [],
+    receipts: [],
     updateUserInfo: (data: shape) => set((state: shape) => ({
-        state: {
-            ...data
-        }
+        budgets: [
+            data.budgets
+        ],
+        expenses: [
+            data.expenses
+        ],
+        receipts: [
+            data.receipts
+        ],
+        balance: data.balance
     }))
 }))

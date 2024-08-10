@@ -43,7 +43,7 @@ export function TransactionsTable() {
 
     const expenses = useDataStore(state => state.expenses);
     const receptions = useDataStore(state => state.receipts);
-    const transactions = [...expenses.expenses, ...receptions.receptions];
+    const transactions = [...expenses, ...receptions];
     const chartData = transactions;
     const chartConfig = {
         visitors: {
@@ -59,7 +59,7 @@ export function TransactionsTable() {
         },
       } satisfies ChartConfig
 
-  const filteredData = chartData.filter((transaction: shape["expenses"]["expenses"] | shape["receipts"]["receptions"]) => {
+  const filteredData = chartData.filter((transaction: shape["expenses"] | shape["receptions"]) => {
     const date = new Date(transaction.created_at)
     const now = new Date()
     let daysToSubtract = 90

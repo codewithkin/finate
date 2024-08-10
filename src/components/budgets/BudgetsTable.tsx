@@ -42,7 +42,8 @@ export function BudgetsTable() {
   const [timeRange, setTimeRange] = React.useState("90d")
 
     const budgets = useDataStore(state => state.budgets);
-    const chartData = budgets.budgets;
+    console.log(budgets[0])
+    const chartData = budgets[0];
     const chartConfig = {
         visitors: {
           label: "Visitors",
@@ -57,18 +58,7 @@ export function BudgetsTable() {
         },
       } satisfies ChartConfig
 
-  const filteredData = chartData.filter((budget: shape["budgets"]["budgets"]) => {
-    const date = new Date(budget.created_at)
-    const now = new Date()
-    let daysToSubtract = 90
-    if (timeRange === "30d") {
-      daysToSubtract = 30
-    } else if (timeRange === "7d") {
-      daysToSubtract = 7
-    }
-    now.setDate(now.getDate() - daysToSubtract)
-    return date >= now
-  })
+  const filteredData = chartData;
 
   return (
     <Card>
@@ -101,7 +91,7 @@ export function BudgetsTable() {
       </CardHeader>
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6">
        {
-            budgets.budgets.length > 0 ?
+            budgets.length > 0 ?
             <ChartContainer
             config={chartConfig}
             className="aspect-auto h-[250px] w-full"
@@ -135,7 +125,7 @@ export function BudgetsTable() {
               </defs>
               <CartesianGrid vertical={false} />
               <XAxis
-                dataKey="date"
+                dataKey="endsOn"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
@@ -163,14 +153,14 @@ export function BudgetsTable() {
                 }
               />
               <Area
-                dataKey="mobile"
+                dataKey="amount"
                 type="natural"
                 fill="url(#fillMobile)"
                 stroke="var(--color-mobile)"
                 stackId="a"
               />
               <Area
-                dataKey="desktop"
+                dataKey="note"
                 type="natural"
                 fill="url(#fillDesktop)"
                 stroke="var(--color-desktop)"
@@ -206,7 +196,7 @@ export function BudgetsTable() {
               No data available yet, create a few budgets to view AI messages.
             </DialogDescription>
             { 
-              budgets.budgets.length === 0 && 
+              budgets.length === 0 && 
               <Link className="font-medium flex justify-center items-center gap-4 hover:bg-purple-800 transition duration-500 text-center rounded-lg bg-primary px-8 py-2 text-white" to="#">
                 Create your first budget
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">

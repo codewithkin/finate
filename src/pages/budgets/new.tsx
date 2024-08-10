@@ -4,10 +4,14 @@ import { useFormik } from "formik";
 import validate from "../../utils/helpers/validateBudgetFields";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import {addNewBudget} from "@/utils/supabaseRequests";
+import { useAuth } from "@clerk/clerk-react";
 
 
 export default function NewBudgetPage () {
     const [loading, setLoading] = useState(false);
+
+    const {userId} = useAuth();
 
     const formik = useFormik({
         initialValues: {
@@ -18,7 +22,20 @@ export default function NewBudgetPage () {
         },
         validate,
         onSubmit: async (values) => {
-            console.log(values);
+            setLoading(true);
+
+            try {
+                const success = await addNewBudget(userId, values);
+
+                if(success) {
+                    // Show a success popup with shadcn
+                    console.log("Success")
+                } 
+            } catch (e) {
+                console.log(e)
+            } finally {
+                setLoading(false);
+            }
         }
     });
 
@@ -78,6 +95,7 @@ export default function NewBudgetPage () {
                 </article>
 
                 <Button
+                disabled={loading}
                 type="submit"
                 variant="default"
                 className="bg-primary hover:bg-purple-500 transition duratrion-500 "

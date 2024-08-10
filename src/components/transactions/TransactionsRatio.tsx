@@ -35,16 +35,16 @@ export function TransactionsRatio() {
   const expenses = useDataStore(state => state.expenses);
   const receptions = useDataStore(state => state.receipts);
 
-  const transactions = [...expenses.expenses, ...receptions.receptions];
+  const transactions = [...expenses, ...receptions];
 
   const chartData = [
     {
       category: "Expenses",
-      number: expenses.expenses.length,
+      number: expenses.length,
     },
     {
       category: "Receptions",
-      number: receptions.receptions.length,
+      number: receptions.length,
     },
 ]
 

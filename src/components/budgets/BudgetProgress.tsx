@@ -14,7 +14,7 @@ export default function BudgetProgress () {
 
             <CardContent>
                 {
-                    budgets.budgets.length > 0 ?
+                    budgets.length > 0 ?
                     <article>
                         <p className="text-primary font-bold">50%</p>
                         <Progress

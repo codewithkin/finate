@@ -15,7 +15,7 @@ export default function TransactionsBreakdown () {
 
                 <div>
                     <h2 className="font-bold text-3xl font-Inter">
-                        {expenses.expenses.length}
+                        {expenses.length}
                     </h2>
                     <h3 className="font-Inter">
                         Expenses
@@ -32,7 +32,7 @@ export default function TransactionsBreakdown () {
 
                 <div>
                     <h2 className="font-bold text-3xl font-Inter">
-                        {receptions.receptions.length}
+                        {receptions.length}
                     </h2>
                     <h3 className="font-Inter">
                         Receptions

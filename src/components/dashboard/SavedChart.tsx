@@ -34,9 +34,9 @@ export default function SavedChart() {
   console.log("Receptions", receptions)
 
   const chartData = [
-    { type: "budgeted", amount: budgets.budgets.length, fill: "#48bfe3" },
-    { type: "spent", amount: expenses.expenses.amount, fill: "#e5383b" },
-    { type: "received", amount: receptions.receptions.amount, fill: "#7ae582" },
+    { type: "budgeted", amount: budgets.length, fill: "#48bfe3" },
+    { type: "spent", amount: expenses.length, fill: "#e5383b" },
+    { type: "received", amount: receptions.length, fill: "#7ae582" },
   ]
   
   const chartConfig = {
@@ -71,13 +71,13 @@ export default function SavedChart() {
       <CardHeader className="items-center pb-0">
         <CardTitle>Overall Statistics</CardTitle>
         {
-          budgets.budgets.length > 0 ?
-          <CardDescription>1 - end of {budgets.budgets[0].createdOn} 2024</CardDescription> :
+          budgets.length > 0 ?
+          <CardDescription>1 - end of {budgets[0].endsOn} 2024</CardDescription> :
           <CardDescription>1 - end of {month} 2024</CardDescription>
         }
       </CardHeader>
       {
-        budgets.budgets.length > 0 && expenses.expenses.length > 0 && receptions.receptions.length > 0 ?
+        budgets.length > 0 && expenses.length > 0 && receptions.length > 0 ?
         <CardContent className="flex-1 pb-0">
           <ChartContainer
             config={chartConfig}
@@ -133,13 +133,13 @@ export default function SavedChart() {
         </h2>
       }
       <CardFooter className="flex-col gap-2 text-sm">
-        {budgets.budgets.length > 0 ?
+        {budgets.length > 0 ?
                   <div className="flex items-center gap-2 font-medium leading-none">
                   5% Increase in savings <TrendingUp className="h-4 w-}4" />
                 </div> :
           <Link className="bg-primary px-8 py-2 hover:bg-purple-700 transition duration-500 rounded-md text-white font-semibold" to="#">Create your first budget</Link>
         }
-        {expenses.expenses.length > 0 &&
+        {expenses.length > 0 &&
           <div className="leading-none text-muted-foreground">
             Showing your spending. 
           </div>

@@ -13,7 +13,7 @@ import { shape } from "@/types/stores/data.type";
 
 export default function ExpenseTable() {
     const expenses = useDataStore(state => state.expenses);
-    const expenseData = expenses.expenses;
+    const expenseData = expenses;
 
     return (
         <>
@@ -39,7 +39,7 @@ export default function ExpenseTable() {
                     {
                     expenseData.length > 0 &&
                     <TableBody>
-                        {expenseData.map((expense: shape["expenses"]["expenses"]) => (
+                        {expenseData.map((expense: shape["expenses"]) => (
                             <TableRow key={expense.created_at}>
                                 <TableCell className="font-medium">{expense.name}</TableCell>
                                 <TableCell className="font-medium">{expense.amount}</TableCell>

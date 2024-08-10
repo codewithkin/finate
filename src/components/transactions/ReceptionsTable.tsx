@@ -14,7 +14,7 @@ import { shape } from "@/types/stores/data.type";
 export default function ReceptionTable() {
     const receptions = useDataStore(state => state.receipts);
 
-    const receptionData = receptions.receptions;
+    const receptionData = receptions;
 
     return (
         <>
@@ -40,9 +40,9 @@ export default function ReceptionTable() {
                     {
                     receptionData.length > 0 &&
                     <TableBody>
-                        {receptionData.map((reception: shape["receipts"]["receptions"]) => (
-                            <TableRow key={reception.created_at}>
-                                <TableCell className="font-medium">{reception.created_at}</TableCell>
+                        {receptionData.map((reception: shape["receipts"]) => (
+                            <TableRow key={reception.name}>
+                                <TableCell className="font-medium">{reception.name}</TableCell>
                                 <TableCell className="font-medium">{reception.amount}</TableCell>
                                 <TableCell className="font-medium">{reception.note}</TableCell>
                                 <TableCell>{reception.endsOn}</TableCell>
