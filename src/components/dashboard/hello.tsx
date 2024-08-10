@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { TrendingUp } from "lucide-react"
 import { Label, Pie, PieChart } from "recharts"
@@ -12,72 +10,47 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+import { Link, useSearchParams } from "react-router-dom"
 import { useDataStore } from "@/stores/data.store"
-import { Link } from "react-router-dom"
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig
 
 export default function SavedChart() {
+  const [data, setChartData] = React.useState();
   
-  // We need to get the expenses, budgets and Receptions(money received) from the zustand store
-  const budgets = useDataStore(state => state.budgets);
-  const expenses = useDataStore(state => state.expenses);
-  const receptions = useDataStore(state => state.receipts)
-
-  console.log("Budgets", budgets)
-  console.log("Expenses", expenses)
-  console.log("Receptions", receptions)
-
-  const chartData = [
-    { type: "budgeted", amount:budgets.length, fill: "#48bfe3" },
-    { type: "spent", amount: expenses.length, fill: "#e5383b" },
-    { type: "received", amount: receptions.length, fill: "#7ae582" },
-  ]
+  const chartConfig = {
+    budgeted: {
+      label: "Budgeted",
+      color: "hsl(var(--chart-1))",
+    },
+    spent: {
+      label: "Spent",
+      color: "hsl(var(--chart-2))",
+    },
+    received: {
+      label: "Received",
+      color: "hsl(var(--chart-3))",
+    },
+  } satisfies ChartConfig
 
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.amount, 0)
   }, [])
 
-  
   const date = new Date();
   const monthNumber = date.getMonth();
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   const month = months[monthNumber];
 
-
   return (
-    <Card className="flex flex-col min-w-[300px]">
-       <CardHeader className="items-center pb-0">
+    <Card className="flex flex-col justify-center items-center">
+      <CardHeader className="items-center pb-0">
         <CardTitle>Overall Statistics</CardTitle>
         {
           budgets.length > 0 ?
@@ -85,12 +58,12 @@ export default function SavedChart() {
           <CardDescription>1 - end of {month} 2024</CardDescription>
         }
       </CardHeader>
-      <CardContent className="flex-1 pb-0">
-        {
-          budgets.length > 0 
+      {
+        budgets.length > 0 
         || expenses.length > 0 
         || receptions.length > 0 ?
-        <ChartContainer
+        <CardContent className="flex-1 pb-0">
+          <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square max-h-[250px]"
         >
@@ -101,8 +74,8 @@ export default function SavedChart() {
             />
             <Pie
               data={chartData}
-              dataKey="amount"
-              nameKey="type"
+              dataKey="type"
+              nameKey="amount"
               innerRadius={60}
               strokeWidth={5}
             >
@@ -121,13 +94,14 @@ export default function SavedChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {budgets.length}
+                          {totalVisitors.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
+                          Visitors
                         </tspan>
                       </text>
                     )
@@ -137,13 +111,12 @@ export default function SavedChart() {
             </Pie>
           </PieChart>
         </ChartContainer>
-        :
+        </CardContent> :
         <h2 className="text-body-text text-2xl text-center font-semibold py-4">
           No data yet.
         </h2>
-        }
-      </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
+      }
+      <CardFooter className="flex-col gap-2 text-sm">
         {budgets.length > 0 ?
                   <div className="flex items-center gap-2 font-medium leading-none">
                   5% Increase in savings <TrendingUp className="h-4 w-}4" />

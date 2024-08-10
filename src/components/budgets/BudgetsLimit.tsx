@@ -16,7 +16,7 @@ export default function BudgetsLimit () {
             </CardHeader>
             <CardContent className="flex justify-center items-center">
                  <div className="w-[100px] h-[100px] flex justify-center items-center">
-                     <CircularProgressbar maxValue={10} value={budgets.length} text={`${budgets.length}%`} />
+                     <CircularProgressbar maxValue={100} value={budgets.length / 10 * 100} text={`${budgets.length / 10 * 100}%`} />
                 </div>
             </CardContent>
         </Card>

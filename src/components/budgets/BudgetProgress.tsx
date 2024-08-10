@@ -4,6 +4,7 @@ import { Progress } from "@/components/ui/progress"
 
 export default function BudgetProgress () {
     const budgets = useDataStore(state => state.budgets);
+    const expenses = useDataStore(state => state.expenses);
 
     return (
         <Card className="flex flex-col gap-2 w-full">
@@ -14,16 +15,21 @@ export default function BudgetProgress () {
 
             <CardContent>
                 {
-                    budgets.length > 0 ?
-                    <article>
-                        <p className="text-primary font-bold">50%</p>
-                        <Progress
-                            color="#7148FC"
-                            value={50}
-                        />
-                    </article>
+                    budgets.length > 0 && expenses.length > 0 ?
+                        budgets.map(budget => {
+                            const percentage = budget.amount / 100 * expenses.length;
+                            return (
+                                <article>
+                                    <p className="text-primary font-bold">{percentage}</p>
+                                    <Progress
+                                        color="#7148FC"
+                                        value={percentage}
+                                    />
+                                </article>
+                            )
+                        })
                     :
-                    <p className="text-body-text">No budgets found.</p>
+                    <p className="text-body-text text-center">No data yet</p>
                 }
             </CardContent>
         </Card>
