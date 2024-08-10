@@ -42,8 +42,7 @@ export function BudgetsTable() {
   const [timeRange, setTimeRange] = React.useState("90d")
 
     const budgets = useDataStore(state => state.budgets);
-    console.log(budgets[0])
-    const chartData = budgets[0];
+    const chartData = budgets;
     const chartConfig = {
         visitors: {
           label: "Visitors",

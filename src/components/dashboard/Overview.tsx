@@ -11,10 +11,11 @@ export default function NewUsers () {
     const {user} = useUser();
 
     const balance = useDataStore(state => state.balance);
+    console.log(balance)
     const expenses = useDataStore(state => state.expenses);
     const budgets = useDataStore(state => state.budgets);
 
-    const saved = balance && expenses.length > 0 ? balance.amount / expenses.length : 0;
+    const saved = balance.amount && expenses.length > 0 ? balance.amount / expenses.length : 0;
 
     let savedColor = "black";
 

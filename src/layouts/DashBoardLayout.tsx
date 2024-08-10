@@ -22,14 +22,20 @@ export default function DashboardLayout() {
             const balance = await getData("balances", userId);
 
             // Get the user's expenses
-            const expenses = await getData("expenses", userId);
+            const expensesData = await getData("expenses", userId);
 
             // Get the user's receipts
-            const receipts = await getData("receptions", userId);
+            const receiptsData = await getData("receptions", userId);
 
             // Get the user's budgets
-            const budgets = await getData("budgets", userId);
-            console.log("Budgets: ",budgets);
+            const budgetsData = await getData("budgets", userId);
+
+            const budgets = budgetsData.filter(budget =>{
+                return budget.userId === userId;
+            })
+
+            const expenses = expensesData.filter(expense => expense.userId === userId)
+            const receipts = receiptsData.filter(receipt => receipt.userId === userId)
 
             updateUserInfo({
                 balance,

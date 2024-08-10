@@ -14,7 +14,8 @@ import { shape } from "@/types/stores/data.type";
 export default function BudgetTable() {
     const budgets = useDataStore(state => state.budgets);
 
-    const budgetData = budgets[0];
+    const budgetData = budgets;
+    console.log(budgets)
 
     return (
         <>
